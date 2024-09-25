@@ -1,58 +1,34 @@
- import React from "react";
- import * as Components from './Components';
+import { Route, Routes, Navigate } from "react-router-dom";
+// import Main from "./components/Main";
+import Signup from "./components/Singup";
+import Login from "./components/Login";
+import UserAccount from "./components/RunModel";
+import Home from "./components/Home";
+import Admin from "./components/Admin";
+import GetUsers from "./components/GetAllUsers";
+import UAccount from "./components/UserAcc";
+import ServicePage from "./components/Service"
+import AboutUs from "./components/AboutUs";
 
- function App() {
-     const [signIn, toggle] = React.useState(true);
-      return(
-          <Components.Container>
-              <Components.SignUpContainer signinIn={signIn}>
-                  <Components.Form>
-                      <Components.Title>Create Account</Components.Title>
-                      <Components.Input type='text' placeholder='Name' />
-                      <Components.Input type='email' placeholder='Email' />
-                      <Components.Input type='password' placeholder='Password' />
-                      <Components.Button>Sign Up</Components.Button>
-                  </Components.Form>
-              </Components.SignUpContainer>
 
-              <Components.SignInContainer signinIn={signIn}>
-                   <Components.Form>
-                       <Components.Title>Sign in</Components.Title>
-                       <Components.Input type='email' placeholder='Email' />
-                       <Components.Input type='password' placeholder='Password' />
-                       <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                       <Components.Button>Sigin In</Components.Button>
-                   </Components.Form>
-              </Components.SignInContainer>
+function App() {
+	const user = localStorage.getItem("token");
 
-              <Components.OverlayContainer signinIn={signIn}>
-                  <Components.Overlay signinIn={signIn}>
+	return (
+		<Routes>
+			{/* {user && <Route path="/" exact element={<Main />} />} */}
+			<Route path="/signup" exact element={<Signup />} />
+			<Route path="/login" exact element={<Login />} />
+			<Route path="/Model" exact element={<UserAccount />} />
+			<Route path="/home" exact element={<Home />} />
+			<Route path="/admin" exact element={<Admin />} />
+			<Route path="/getUsers" exact element={<GetUsers />} />
+			<Route path="/userAcc" exact element={<UAccount />} />
+			<Route path="/service" exact element={<ServicePage />} />
+			<Route path="/aboutUs" exact element={<AboutUs />} />
+			{/* <Route path="/" element={<Navigate replace to="/login" />} /> */}
+		</Routes>
+	);
+}
 
-                  <Components.LeftOverlayPanel signinIn={signIn}>
-                      <Components.Title>Welcome Back!</Components.Title>
-                      <Components.Paragraph>
-                          To keep connected with us please login with your personal info
-                      </Components.Paragraph>
-                      <Components.GhostButton onClick={() => toggle(true)}>
-                          Sign In
-                      </Components.GhostButton>
-                      </Components.LeftOverlayPanel>
-
-                      <Components.RightOverlayPanel signinIn={signIn}>
-                        <Components.Title>Hello, Friend!</Components.Title>
-                        <Components.Paragraph>
-                            Enter Your personal details and start journey with us
-                        </Components.Paragraph>
-                            <Components.GhostButton onClick={() => toggle(false)}>
-                                Sigin Up
-                            </Components.GhostButton> 
-                      </Components.RightOverlayPanel>
-  
-                  </Components.Overlay>
-              </Components.OverlayContainer>
-
-          </Components.Container>
-      )
- }
-
- export default App;
+export default App;
